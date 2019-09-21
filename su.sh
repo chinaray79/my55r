@@ -36,7 +36,8 @@ testfun(){
 	echo -e "    \"method\":\"${shadowsockscipher}\",\r" >> config.json
 	echo -e "    \"fast_open\":${shadowfastopen}\r" >> config.json
 	echo -e "\r}\r" >> config.json
-	cp /etc/shadowsocks-python/config.json config.${shadowoldport}.json
+	echo -e "${green}if the file exists,please ${red}do not overwrite ${green}the file${plain}"
+	cp /etc/shadowsocks-python/config.json /etc/shadowsocks-python/config.${shadowoldport}.json
 }
 
 testfun
