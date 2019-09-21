@@ -7,7 +7,7 @@ yellow='\033[0;33m'
 plain='\033[0m'
 
 testfun(){
-echo -e "{\r" > config.json
+	echo -e "{\r" > config.json
 echo -e '    "server":"0.0.0.0",\r' >> config.json
 echo -e '    "server_port":14326,\r' >> config.json
 echo -e '    "local_address":"127.0.0.1",\r' >> config.json
