@@ -11,10 +11,9 @@ plain='\033[0m'
   else
     cd /root
 	git clone https://github.com/chinaray79/my55r
-	cd /root/my55r
-	chmod 777 *.sh
+	\cp -f my55r/ugit.sh ./u.sh
   fi
-
+  cd /root
   \cp -f my55r/*.sh ./
   cd /root
   chmod 777 *.sh 
