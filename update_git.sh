@@ -10,3 +10,4 @@ rm my55r -rf
 git clone https://github.com/chinaray79/my55r
 \cp -r -f my55r/*.sh ./
 chmod 777 *.sh
+# check new
