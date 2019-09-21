@@ -48,10 +48,18 @@ qr_generate_python(){
     echo
     echo "Your QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)"
     echo -e "${green} ${qr_code} ${plain}"
-	echo "${qr_code}" > qr_code.txt
+	echo "${qr_code}" > ssr_$(get_ip).txt
     echo -n "${qr_code}" | qrencode -s8 -o ${cur_dir}/shadowsocks_python_qr.png
     echo "Your QR Code has been saved as a PNG file path:"
     echo -e "${green} ${cur_dir}/shadowsocks_python_qr.png ${plain}"
 }
+cp_funs(){
+	echo -e "${green}scp root@$(get_ip):/root/ssr_$(get_ip).txt D:\\SSR\\ssr_$(get_ip).txt\r"
+	echo -e "${green}scp root@$(get_ip):/root/shadowsocks_python_qr.png D:\\SSR\\ssr_$(get_ip).png\r"
+	echo -e "${green}echo %date% %time% >> D:\\SSR\\SSR_Result.txt"
+	echo -e "${green}echo \"The SSR For IP:$(get_ip)  \n\" >> D:\\SSR\\SSR_Result.txt"
+	echo -e "${green}more D:\\SSR\\ssr_$(get_ip).txt\n\n >> D:\\SSR\\SSR_Result.txt"
+}
 set_ssr_json
 qr_generate_python
+cp_funs
