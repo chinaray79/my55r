@@ -6,13 +6,17 @@ green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
 
+#used port(65535 Max) 14326.  
+
 shadowserver="0.0.0.0"
-shadowsocksport=14326
+shadowsocksport=50505
+shadowoldport=14326
 shadowlocalip="127.0.0.1"
 shadowlocalport="1080"
 shadowtimeout=300
 shadowsockscipher="aes-256-cfb"
 shadowfastopen="false"
+
 
 get_ip(){
     local IP=$( ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^192\.168|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\." | head -n 1 )
@@ -32,8 +36,7 @@ testfun(){
 	echo -e "    \"method\":\"${shadowsockscipher}\",\r" >> config.json
 	echo -e "    \"fast_open\":${shadowfastopen}\r" >> config.json
 	echo -e "\r}\r" >> config.json
-	cat config.json
-	diff config.json config.bck.json
+	cp /etc/shadowsocks-python/config.json config.${shadowoldport}.json
 }
 
 testfun
