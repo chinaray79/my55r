@@ -6,10 +6,10 @@ green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
   if [ -d "/root/my55r" ] ; then
-    cd /root/my55r
+	cd /root/my55r
 	git pull
   else
-    cd /root
+	cd /root
 	git clone https://github.com/chinaray79/my55r
 	\cp -f my55r/ugit.sh ./u.sh
   fi
