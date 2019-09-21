@@ -71,3 +71,4 @@ cp_funs(){
 set_ssr_json
 qr_generate_python
 cp_funs
+/etc/init.d/shadowsocks-python restart
