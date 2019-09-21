@@ -67,5 +67,3 @@ test_config(){
 	cat config.json
 	diff config.json config.bck.json
 }
-
-test_config
