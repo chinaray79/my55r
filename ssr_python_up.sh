@@ -53,7 +53,19 @@ qr_generate_python(){
     echo -e "${green} ${cur_dir}/shadowsocks_python_qr.png ${plain}"
 }
 
-get_parameters
-install_completed_python
-qr_generate_python
+test_config(){
+    echo -e "{\r" > config.json
+	echo -e '    "server":"0.0.0.0",\r' >> config.json
+	echo -e '    "server_port":14326,\r' >> config.json
+	echo -e '    "local_address":"127.0.0.1",\r' >> config.json
+	echo -e '    "local_port":1080,\r' >> config.json
+	echo -e '    "password":"aatkukb79",\r' >> config.json
+	echo -e '    "timeout":300,\r' >> config.json
+	echo -e '    "method":"aes-256-cfb",\r' >> config.json
+	echo -e '    "fast_open":false\r' >> config.json
+	echo -e "\r}\r" >> config.json
+	cat config.json
+	diff config.json config.bck.json
+}
 
+test_config
