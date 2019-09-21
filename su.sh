@@ -27,6 +27,9 @@ get_ip(){
 }
 
 set_ssr_json(){
+	read -p "port (50505): " shadowsocksport
+	[ -z "${shadowsocksport}" ] && shadowsocksport="50505"
+
 	cat > ${shadowsocks_python_config}<<-EOF
 {
     "server":"0.0.0.0",
@@ -62,7 +65,7 @@ cp_funs(){
 	echo ""
 	echo -e "${green}scp root@$(get_ip):/root/ssr_$(get_ip).txt D:\\SSR\\SSR_$(get_ip).txt\r"
 	echo -e "${green}scp root@$(get_ip):/root/shadowsocks_python_qr.png D:\\SSR\\SSR_$(get_ip).png\r"
-	echo -e "${green}echo %date% %time%  The SSR For IP:$(get_ip) >> D:\\SSR\\SSR_Result.txt"
+	echo -e "${green}echo %date% %time%  The SSR For IP:$(get_ip) Port:$(shadowsocksport) >> D:\\SSR\\SSR_Result.txt"
 	echo -e "${green}more D:\\SSR\\ssr_$(get_ip).txt >> D:\\SSR\\SSR_Result.txt${plain}"
 	echo -e "${green}echo. >> D:\\SSR\\SSR_Result.txt${plain}"
 	echo -e "${green}echo. >> D:\\SSR\\SSR_Result.txt${plain}"
@@ -75,8 +78,8 @@ cp_funs(){
 # Useless function: 
 ####################################################
 get_parameters(){
-	read -p "port (14326): " shadowsocksport
-	[ -z "${shadowsocksport}" ] && shadowsocksport="14326"
+	read -p "port (50505): " shadowsocksport
+	[ -z "${shadowsocksport}" ] && shadowsocksport="50505"
 	read -p "Password (a*9): " shadowsockspwd
 	[ -z "${shadowsockspwd}" ] && shadowsockspwd="aatkukb79"
 	read -p "Encryption (aes-256-cfb): " shadowsockscipher
