@@ -13,6 +13,7 @@ shadowsocksport=50505
 shadowoldport=14326
 shadowlocalip="127.0.0.1"
 shadowlocalport="1080"
+shadowsockspwd="aatkukb79"
 shadowtimeout=300
 shadowsockscipher="aes-256-cfb"
 shadowfastopen="false"
@@ -25,19 +26,32 @@ get_ip(){
     echo ${IP}
 }
 
-testfun(){
+set_ssr_json(){
 	echo -e "{\r" > config.json
 	echo -e "    \"server\":\"${shadowserver}\",\r" >> config.json
 	echo -e "    \"server_port\":${shadowsocksport},\r" >> config.json
 	echo -e "    \"local_address\":\"${shadowlocalip}\",\r" >> config.json
 	echo -e "    \"local_port\":${shadowlocalport},\r" >> config.json
-	echo -e "    \"password\":\"aatkukb79\",\r" >> config.json
+	echo -e "    \"password\":\"${shadowsockspwd}\",\r" >> config.json
 	echo -e "    \"timeout\":${shadowtimeout},\r" >> config.json
 	echo -e "    \"method\":\"${shadowsockscipher}\",\r" >> config.json
 	echo -e "    \"fast_open\":${shadowfastopen}\r" >> config.json
 	echo -e "\r}\r" >> config.json
 	echo -e "${green}if the file exists,please ${red}do not overwrite ${green}the file${plain}"
 	cp /etc/shadowsocks-python/config.json /etc/shadowsocks-python/config.${shadowoldport}.json
+	cp config.json /etc/shadowsocks-python/config.json
 }
-
-testfun
+qr_generate_python(){
+	cur_dir=$( pwd )
+    local tmp=$(echo -n "${shadowsockscipher}:${shadowsockspwd}@$(get_ip):${shadowsocksport}" | base64 -w0)
+    local qr_code="ss://${tmp}"
+    echo
+    echo "Your QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)"
+    echo -e "${green} ${qr_code} ${plain}"
+	echo "${qr_code}" > qr_code.txt
+    echo -n "${qr_code}" | qrencode -s8 -o ${cur_dir}/shadowsocks_python_qr.png
+    echo "Your QR Code has been saved as a PNG file path:"
+    echo -e "${green} ${cur_dir}/shadowsocks_python_qr.png ${plain}"
+}
+set_ssr_json
+qr_generate_python
