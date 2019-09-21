@@ -70,6 +70,19 @@ cp_funs(){
 	echo ""
 	echo ""
 }
+
+####################################################
+# Useless function: 
+####################################################
+get_parameters(){
+	read -p "port (14326): " shadowsocksport
+	[ -z "${shadowsocksport}" ] && shadowsocksport="14326"
+	read -p "Password (a*9): " shadowsockspwd
+	[ -z "${shadowsockspwd}" ] && shadowsockspwd="aatkukb79"
+	read -p "Encryption (aes-256-cfb): " shadowsockscipher
+	[ -z "${shadowsockscipher}" ] && shadowsockscipher="aes-256-cfb"
+}
+
 set_ssr_json
 qr_generate_python
 cp_funs
