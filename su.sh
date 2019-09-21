@@ -16,7 +16,7 @@ shadowlocalport="1080"
 shadowsockspwd="aatkukb79"
 shadowtimeout=300
 shadowsockscipher="aes-256-cfb"
-shadowfastopen="false"
+fast_open="false"
 
 
 get_ip(){
@@ -27,16 +27,18 @@ get_ip(){
 }
 
 set_ssr_json(){
-	echo -e "{\r" > config.json
-	echo -e "    \"server\":\"${shadowserver}\",\r" >> config.json
-	echo -e "    \"server_port\":${shadowsocksport},\r" >> config.json
-	echo -e "    \"local_address\":\"${shadowlocalip}\",\r" >> config.json
-	echo -e "    \"local_port\":${shadowlocalport},\r" >> config.json
-	echo -e "    \"password\":\"${shadowsockspwd}\",\r" >> config.json
-	echo -e "    \"timeout\":${shadowtimeout},\r" >> config.json
-	echo -e "    \"method\":\"${shadowsockscipher}\",\r" >> config.json
-	echo -e "    \"fast_open\":${shadowfastopen}\r" >> config.json
-	echo -e "\r}\r" >> config.json
+	cat > ${shadowsocks_python_config}<<-EOF
+{
+    "server":"0.0.0.0",
+    "server_port":${shadowsocksport},
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "password":"${shadowsockspwd}",
+    "timeout":300,
+    "method":"${shadowsockscipher}",
+    "fast_open":${fast_open}
+}
+EOF
 	echo -e "${green}if the file exists,please ${red}do not overwrite ${green}the file${plain}"
 	cp /etc/shadowsocks-python/config.json /etc/shadowsocks-python/config.${shadowoldport}.json
 	cp config.json /etc/shadowsocks-python/config.json
