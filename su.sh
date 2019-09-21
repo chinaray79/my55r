@@ -56,9 +56,11 @@ qr_generate_python(){
 cp_funs(){
 	echo -e "${green}scp root@$(get_ip):/root/ssr_$(get_ip).txt D:\\SSR\\ssr_$(get_ip).txt\r"
 	echo -e "${green}scp root@$(get_ip):/root/shadowsocks_python_qr.png D:\\SSR\\ssr_$(get_ip).png\r"
-	echo -e "${green}echo %date% %time% >> D:\\SSR\\SSR_Result.txt"
-	echo -e "${green}echo \"The SSR For IP:$(get_ip)  \" >> D:\\SSR\\SSR_Result.txt"
+	echo -e "${green}echo %date% %time%  The SSR For IP:$(get_ip) >> D:\\SSR\\SSR_Result.txt"
 	echo -e "${green}more D:\\SSR\\ssr_$(get_ip).txt >> D:\\SSR\\SSR_Result.txt${plain}"
+	echo ""
+	echo ""
+	echo ""
 }
 set_ssr_json
 qr_generate_python
