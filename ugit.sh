@@ -18,4 +18,3 @@ cd /root
 cd /root
 chmod 777 *.sh 
 
- #
