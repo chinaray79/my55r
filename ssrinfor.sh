@@ -39,6 +39,8 @@ get_ssr_parameters(){
 }
 qr_generate_python(){
 	cur_dir=$( pwd )
+	local tmp_org="${shadowsockscipher}:${shadowsockspwd}@$(get_ip):${shadowsocksport}"
+	echo -e "ss://${tmp_org}"
     local tmp=$(echo -n "${shadowsockscipher}:${shadowsockspwd}@$(get_ip):${shadowsocksport}" | base64 -w0)
     local qr_code="ss://${tmp}"
     echo
