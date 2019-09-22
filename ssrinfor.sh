@@ -35,6 +35,7 @@ get_ssr_parameters(){
 	shadowtimeout=$(get_ssr_value timeout)
 	shadowsockscipher=$(get_ssr_value method)
 	fast_open=$(get_ssr_value fast_open)
+	server_infor=$(get_ssr_value server.json server_infor)
 }
 qr_generate_python(){
 	cur_dir=$( pwd )
@@ -55,7 +56,7 @@ cp_funs(){
 	echo ""
 	echo -e "${green}scp root@$(get_ip):/root/ssr_$(get_ip).txt D:\\SSR\\SSR_$(get_ip).txt\r"
 	echo -e "${green}scp root@$(get_ip):/root/shadowsocks_python_qr.png D:\\SSR\\SSR_$(get_ip).png\r"
-	echo -e "${green}echo %date% %time%  The SSR For IP:$(get_ip) Port:${shadowsocksport} >> D:\\SSR\\SSR_Result.txt"
+	echo -e "${green}echo %date% %time%  The SSR For IP:$(get_ip) Port:${shadowsocksport} Server:${server_infor}>> D:\\SSR\\SSR_Result.txt"
 	echo -e "${green}more D:\\SSR\\ssr_$(get_ip).txt >> D:\\SSR\\SSR_Result.txt${plain}"
 	echo -e "${green}echo. >> D:\\SSR\\SSR_Result.txt${plain}"
 	echo -e "${green}echo. >> D:\\SSR\\SSR_Result.txt${plain}"
