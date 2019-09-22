@@ -18,6 +18,8 @@ get_json_value(){
 		local val=$(cat $1 | grep $2)
 		val=${val#*:}
 		val=${val%*,}
+		val=${val#*\"}
+		val=${val%*\"}
 		echo ${val}
 	fi
 }
@@ -40,6 +42,7 @@ get_ssr_parameters(){
 qr_generate_python(){
 	cur_dir=$( pwd )
 	local tmp_org="${shadowsockscipher}:${shadowsockspwd}@$(get_ip):${shadowsocksport}"
+	echo "QR Code Source is:"
 	echo -e "ss://${tmp_org}"
     local tmp=$(echo -n "${shadowsockscipher}:${shadowsockspwd}@$(get_ip):${shadowsocksport}" | base64 -w0)
     local qr_code="ss://${tmp}"
