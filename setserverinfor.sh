@@ -22,7 +22,7 @@ get_server_infor(){
 write_server_infor(){
 	    cat > server.json <<-EOF
 {
-    "server_infor":"${server_infor}",
+    "server_infor":${server_infor},
     "server_ipaddr":$(get_ip)
 }
 EOF

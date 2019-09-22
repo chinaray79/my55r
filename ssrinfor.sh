@@ -35,7 +35,7 @@ get_ssr_parameters(){
 	shadowtimeout=$(get_ssr_value timeout)
 	shadowsockscipher=$(get_ssr_value method)
 	fast_open=$(get_ssr_value fast_open)
-	server_infor=$(get_ssr_value server.json server_infor)
+	server_infor=$(get_json_value server.json server_infor)
 }
 qr_generate_python(){
 	cur_dir=$( pwd )
@@ -65,5 +65,7 @@ cp_funs(){
 	echo ""
 }
 get_ssr_parameters
+#echo ${server_infor}
 qr_generate_python
 cp_funs
+#ls
