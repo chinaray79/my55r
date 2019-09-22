@@ -1,23 +1,11 @@
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-export PATH
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
-
-#used port(65535 Max) 14326.  
-
-shadowserver="0.0.0.0"
-shadowsocksport=50505
-shadowoldport=14326
-shadowlocalip="127.0.0.1"
-shadowlocalport="1080"
-shadowsockspwd="aatkukb79"
-shadowtimeout=300
-shadowsockscipher="aes-256-cfb"
-fast_open="false"
-
+#/etc/shadowsocks-python/config.json
+ssr_cfig_file="/etc/shadowsocks-python/config.json"
 
 get_ip(){
     local IP=$( ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^192\.168|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\." | head -n 1 )
@@ -25,26 +13,28 @@ get_ip(){
     [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipinfo.io/ip )
     echo ${IP}
 }
-
-set_ssr_json(){
-	read -p "port (50505): " shadowsocksport
-	[ -z "${shadowsocksport}" ] && shadowsocksport="50505"
-
-	cat > ${shadowsocks_python_config}<<-EOF
-{
-    "server":"0.0.0.0",
-    "server_port":${shadowsocksport},
-    "local_address":"127.0.0.1",
-    "local_port":1080,
-    "password":"${shadowsockspwd}",
-    "timeout":300,
-    "method":"${shadowsockscipher}",
-    "fast_open":${fast_open}
+get_json_value(){
+	if [ $# -eq 2 ] ; then
+		local val=$(cat $1 | grep $2)
+		val=${val#*:}
+		val=${val%*,}
+		echo ${val}
+	fi
 }
-EOF
-	echo -e "${green}if the file exists,please ${red}do not overwrite ${green}the file${plain}"
-	cp /etc/shadowsocks-python/config.json /etc/shadowsocks-python/config.${shadowoldport}.json
-	cp config.json /etc/shadowsocks-python/config.json
+get_ssr_value(){
+	if [ $# -eq 1 ] ; then
+		echo $(get_json_value ${ssr_cfig_file} $1)
+	fi
+}
+get_ssr_parameters(){
+	shadowserver=$(get_ssr_value server\")
+	shadowsocksport=$(get_ssr_value server_port)
+	shadowlocalip=$(get_ssr_value local_address)
+	shadowlocalport=$(get_ssr_value local_port)
+	shadowsockspwd=$(get_ssr_value password)
+	shadowtimeout=$(get_ssr_value timeout)
+	shadowsockscipher=$(get_ssr_value method)
+	fast_open=$(get_ssr_value fast_open)
 }
 qr_generate_python(){
 	cur_dir=$( pwd )
@@ -73,20 +63,6 @@ cp_funs(){
 	echo ""
 	echo ""
 }
-
-####################################################
-# Useless function: 
-####################################################
-get_parameters(){
-	read -p "port (50505): " shadowsocksport
-	[ -z "${shadowsocksport}" ] && shadowsocksport="50505"
-	read -p "Password (a*9): " shadowsockspwd
-	[ -z "${shadowsockspwd}" ] && shadowsockspwd="aatkukb79"
-	read -p "Encryption (aes-256-cfb): " shadowsockscipher
-	[ -z "${shadowsockscipher}" ] && shadowsockscipher="aes-256-cfb"
-}
-
-set_ssr_json
+get_ssr_parameters
 qr_generate_python
 cp_funs
-/etc/init.d/shadowsocks-python restart
