@@ -58,6 +58,15 @@ qr_generate_python(){
     echo "Your QR Code has been saved as a PNG file path:"
     echo -e "${green} ${cur_dir}/shadowsocks_python_qr.png ${plain}"
 }
+get_json_value(){
+	if [ $# -eq 2 ] ; then
+		local val=$(cat $1 | grep $2)
+		val=${val#*:}
+		val=${val%*,}
+		echo ${val}
+	fi
+}
+server_infor=$(get_json_value server.json server_infor)
 cp_funs(){
 	echo ""
 	echo ""
@@ -65,7 +74,7 @@ cp_funs(){
 	echo ""
 	echo -e "${green}scp root@$(get_ip):/root/ssr_$(get_ip).txt D:\\SSR\\SSR_$(get_ip).txt\r"
 	echo -e "${green}scp root@$(get_ip):/root/shadowsocks_python_qr.png D:\\SSR\\SSR_$(get_ip).png\r"
-	echo -e "${green}echo %date% %time%  The SSR For IP:$(get_ip) Port:${shadowsocksport} >> D:\\SSR\\SSR_Result.txt"
+	echo -e "${green}echo %date% %time%  The SSR For IP:$(get_ip) Port:${shadowsocksport} Server:${server_infor}>> D:\\SSR\\SSR_Result.txt"
 	echo -e "${green}more D:\\SSR\\ssr_$(get_ip).txt >> D:\\SSR\\SSR_Result.txt${plain}"
 	echo -e "${green}echo. >> D:\\SSR\\SSR_Result.txt${plain}"
 	echo -e "${green}echo. >> D:\\SSR\\SSR_Result.txt${plain}"
