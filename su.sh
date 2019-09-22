@@ -58,15 +58,7 @@ qr_generate_python(){
     echo "Your QR Code has been saved as a PNG file path:"
     echo -e "${green} ${cur_dir}/shadowsocks_python_qr.png ${plain}"
 }
-get_json_value(){
-	if [ $# -eq 2 ] ; then
-		local val=$(cat $1 | grep $2)
-		val=${val#*:}
-		val=${val%*,}
-		echo ${val}
-	fi
-}
-server_infor=$(get_json_value server.json server_infor)
+
 cp_funs(){
 	echo ""
 	echo ""
@@ -97,5 +89,5 @@ get_parameters(){
 
 set_ssr_json
 qr_generate_python
-cp_funs
+./ssrinfor.sh
 /etc/init.d/shadowsocks-python restart
