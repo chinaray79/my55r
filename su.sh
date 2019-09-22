@@ -7,7 +7,7 @@ yellow='\033[0;33m'
 plain='\033[0m'
 
 #used port(65535 Max) 14326.  
-
+shadowsocks_python_config="/etc/shadowsocks-python/config.json"
 shadowserver="0.0.0.0"
 shadowsocksport=50505
 shadowoldport=14326
