@@ -60,6 +60,7 @@ qr_generate_python(){
 }
 
 cp_funs(){
+	cat /etc/shadowsocks-python/config.json
 	echo ""
 	echo ""
 	echo -e "${red}--------------------------------------------------------------------------"
