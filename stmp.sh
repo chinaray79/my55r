@@ -82,3 +82,11 @@ cp_funs(){
 }
 get_ssr_parameters
 show_ssr_parameters
+
+testfun1(){
+	local val="aatkukb79",
+	echo ${val}
+}
+
+echo $(testfun1)
+

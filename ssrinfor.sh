@@ -17,9 +17,9 @@ get_json_value(){
 	if [ $# -eq 2 ] ; then
 		local val=$(cat $1 | grep $2)
 		val=${val#*:}
-		val=${val%*,}
 		val=${val#*\"}
-		val=${val%*\"}
+		val=${val%,*}
+		val=${val%\"*}
 		echo ${val}
 	fi
 }
