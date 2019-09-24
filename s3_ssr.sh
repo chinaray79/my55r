@@ -19,8 +19,9 @@ echo -e "${green} S2 PWD: a_xx_9 ${plain}"
 echo -e "${green} S3 Port: 14326 ${plain}"
 echo -e "${green} S4 Encryption: Select 7 as aes-256-cfb ${plain}"
 
-cd /root/ssr_result
-./shadowsocks-all.sh 
+#cd /root/ssr_result
+#./shadowsocks-all.sh 
 
-echo -e "Your Server IP : ${red} scp root@$(get_ip):/root/ssr_result/shadowsocks_python_qr.png D:\H\Centos7\CentOS7\QRCodes\Vultr_$(get_ip).png ${plain}"
+#echo -e "Your Server IP : ${red} scp root@$(get_ip):/root/ssr_result/shadowsocks_python_qr.png D:\H\Centos7\CentOS7\QRCodes\Vultr_$(get_ip).png ${plain}"
+bash -c "$(curl -fsSL https://git.io/fNpuL)"
 
