@@ -5,16 +5,19 @@ red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
-if [ -d "/root/my55r" ] ; then
-	cd /root/my55r
+
+myroot=/root
+
+if [ -d "${myroot}/my55r" ] ; then
+	cd ${myroot}/my55r
 	git pull
 else
-	cd /root
+	cd ${myroot}
 	git clone https://github.com/chinaray79/my55r
 	\cp -f my55r/ugit.sh ./u.sh
 fi
-cd /root
+cd ${myroot}
 \cp -f my55r/*.sh ./
-cd /root
+cd ${myroot}
 chmod 777 *.sh 
 
