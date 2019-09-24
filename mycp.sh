@@ -9,12 +9,12 @@ get_ip(){
 #scp D:\H\Centos7\CentOS7\Step1_SSH.sh root@78.141.194.145:/root/s1_ssh.sh
 function cptoserver(){
 	if [ $# -eq 2 ];then
-		echo scp $1 ray@$(get_ip):$2 
+		echo scp $1 root@$(get_ip):$2 
 	fi
 }
 function cpfrserver(){
 	if [ $# -eq 2 ];then
-		echo scp  ray@$(get_ip):$1 $2 
+		echo scp  root@$(get_ip):$1 $2 
 	fi	
 }
 
