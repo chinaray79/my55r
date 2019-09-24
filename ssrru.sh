@@ -6,7 +6,7 @@ green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
 
-if [ ! -d "/root/ssr_result" ];then
+if [  -d "/root/ssr_result" ];then
 	echo "the folder exists"
 	cd /root/ssr_result
 	./shadowsocks-all.sh uninstall
