@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+Ôªø#!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 red='\033[0;31m'
 green='\033[0;32m'
@@ -74,17 +74,18 @@ get_ssr_parameters(){
 	shadowserver_protocal_param=$(get_ssr_value protocol_param)
 }
 #ssr://server:port:protocol:method:obfs:password_base64/?params_base64
-#params_base_64µƒππ≥…Œ™£∫
+#params_base_64ÁöÑÊûÑÊàê‰∏∫Ôºö
 #   obfsparam=obfsparam_base64&protoparam=protoparam_base64&remarks=remarks_base64&group=group_base64
 show_ssr_parameters(){
 	echo "ip                 : ${shadowserver_ip}"
 	echo "port               : ${shadowserver_port}"
-	echo "protocal           : ${shadowserver_protocol}"
-	echo "method             : ${shadowserver_method}"
-	echo "obfs               : ${shadowserver_obfs}"
 	echo "pwd                : ${shadowserver_password}"
-	echo "obfsparam          : ${shadowserver_obfsparam}"
+	echo "method(Âä†ÂØÜ)       : ${shadowserver_method}"
+	echo "protocal(ÂçèËÆÆ)     : ${shadowserver_protocol}"
 	echo "protocal_localparam: ${shadowserver_protocal_param}"
+	echo "obfs(Ê∑∑Ê∑Ü)         : ${shadowserver_obfs}"
+	echo "obfsparam(Ê∑∑Ê∑ÜÂèÇÊï∞): ${shadowserver_obfsparam}"
+
 
 #	echo "ssr://NDUuMzIuMjMuNjc6MTEyNDk6YXV0aF9ha2FyaW5fcmFuZDpjaGFjaGEyMC1pZXRmOnRsczEuMl90aWNrZXRfYXV0aDpNRFpHUWsxU0lTcFFSSEpvVWpCNE1RPT0vP29iZnNwYXJhbT0="
 #	echo "ssr://45.32.23.67:11249:auth_akarin_rand:chacha20-ietf:tls1.2_ticket_auth:MDZGQk1SISpQRHJoUjB4MQ==/?obfsparam="
@@ -106,7 +107,7 @@ calc_ssr_infors(){
 	echo ""
 	echo ""
 }
-#æ…µƒSS∑Ω Ωµƒ¥¶¿Ì∑Ω∑®
+#ÊóßÁöÑSSÊñπÂºèÁöÑÂ§ÑÁêÜÊñπÊ≥ï
 qr_generate_python(){
 	cur_dir=$( pwd )
 	local tmp_org="${shadowsockscipher}:${shadowsockspwd}@$(get_ip):${shadowsocksport}"
@@ -155,4 +156,6 @@ if [  -f "${ssr_cfig_file}" ];then
 fi
 
 
-# scp ray@192.168.12.211:/home/ray/ray/my55r/ssrinfor.sh D:\H\Centos7\CentOS7\ssrinfor.sh
+
+#scp ray@192.168.12.211:/home/ray/ray/my55r/ssrinfor.sh D:/H/Centos7/CentOS7/ssrinfor.sh
+#scp ray@192.168.12.211:/home/ray/ray/my55r/setserverinfor.sh D:/H/Centos7/CentOS7/setserverinfor.sh
