@@ -77,19 +77,19 @@ get_ssr_parameters(){
 #params_base_64的构成为：
 #   obfsparam=obfsparam_base64&protoparam=protoparam_base64&remarks=remarks_base64&group=group_base64
 show_ssr_parameters(){
-	echo "ip: ${shadowserver_ip}"
-	echo "port:${shadowserver_port}"
-	echo "protocal: ${shadowserver_protocol}"
-	echo "method:${shadowserver_method}"
-	echo "obfs:${shadowserver_obfs}"
-	echo "pwd:${shadowserver_password}"
-	echo "obfsparam:${shadowserver_obfsparam}"
+	echo "ip                 : ${shadowserver_ip}"
+	echo "port               :${shadowserver_port}"
+	echo "protocal           : ${shadowserver_protocol}"
+	echo "method             :${shadowserver_method}"
+	echo "obfs               :${shadowserver_obfs}"
+	echo "pwd                :${shadowserver_password}"
+	echo "obfsparam          :${shadowserver_obfsparam}"
 	echo "protocal_localparam:${shadowserver_protocal_param}"
 
-	echo "ssr://NDUuMzIuMjMuNjc6MTEyNDk6YXV0aF9ha2FyaW5fcmFuZDpjaGFjaGEyMC1pZXRmOnRsczEuMl90aWNrZXRfYXV0aDpNRFpHUWsxU0lTcFFSSEpvVWpCNE1RPT0vP29iZnNwYXJhbT0="
-	echo "ssr://45.32.23.67:11249:auth_akarin_rand:chacha20-ietf:tls1.2_ticket_auth:MDZGQk1SISpQRHJoUjB4MQ==/?obfsparam="
-	echo "ssr://server:port:protocol:method:obfs:password_base64/?params_base64"
-	echo "  obfsparam=obfsparam_base64&protoparam=protoparam_base64&remarks=remarks_base64&group=group_base64"
+#	echo "ssr://NDUuMzIuMjMuNjc6MTEyNDk6YXV0aF9ha2FyaW5fcmFuZDpjaGFjaGEyMC1pZXRmOnRsczEuMl90aWNrZXRfYXV0aDpNRFpHUWsxU0lTcFFSSEpvVWpCNE1RPT0vP29iZnNwYXJhbT0="
+#	echo "ssr://45.32.23.67:11249:auth_akarin_rand:chacha20-ietf:tls1.2_ticket_auth:MDZGQk1SISpQRHJoUjB4MQ==/?obfsparam="
+#	echo "ssr://server:port:protocol:method:obfs:password_base64/?params_base64"
+#	echo "  obfsparam=obfsparam_base64&protoparam=protoparam_base64&remarks=remarks_base64&group=group_base64"
 }
 calc_ssr_infors(){
 	echo ""
