@@ -150,7 +150,7 @@ fi
 if [  -f "${ssr_cfig_file}" ];then
 	get_ssr_parameters
 	#shadowserver_ip="45.32.23.67"
-	#show_ssr_parameters
+	show_ssr_parameters
 	calc_ssr_infors
 fi
 
