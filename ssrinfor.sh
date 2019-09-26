@@ -92,14 +92,19 @@ show_ssr_parameters(){
 	echo "  obfsparam=obfsparam_base64&protoparam=protoparam_base64&remarks=remarks_base64&group=group_base64"
 }
 calc_ssr_infors(){
-	echo "ssr infors"
+	echo ""
+	echo ""
 	local ssrbasic="${shadowserver_ip}:${shadowserver_port}:${shadowserver_protocol}:${shadowserver_method}:${shadowserver_obfs}:$(code_base_64 ${shadowserver_password})"
 	# $(code_base_64 ${})
-	local ssrparamas_base64="obfsparam=$(code_base_64 ${shadowserver_obfsparam})"
-	#&protoparam=$(code_base_64 ${shadowserver_protocal_param})
+	local ssrparamas_base64="obfsparam=$(code_base_64 ${shadowserver_obfsparam})&protoparam=$(code_base_64 ${shadowserver_protocal_param})&remarks=$(code_base_64 ${server_infor})&group=$(code_base_64 ${server_group})"
+	# &remarks=$(code_base_64 ${server_infor})&group=$(code_base_64 ${server_group})
 	local ssr_txt="${ssrbasic}/?${ssrparamas_base64}"
-	echo ${ssr_txt}
-	echo "ssr://$(code_base_64 ${ssr_txt})"
+	echo "Before Base64 Coding:"
+	echo "      ${ssr_txt}"
+	echo ""
+	echo -e "${green}ssr://$(code_base_64 ${ssr_txt})${plain}"
+	echo ""
+	echo ""
 }
 #旧的SS方式的处理方法
 qr_generate_python(){
@@ -144,8 +149,8 @@ fi
 
 if [  -f "${ssr_cfig_file}" ];then
 	get_ssr_parameters
-	shadowserver_ip="45.32.23.67"
-	show_ssr_parameters
+	#shadowserver_ip="45.32.23.67"
+	#show_ssr_parameters
 	calc_ssr_infors
 fi
 
