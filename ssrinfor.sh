@@ -85,7 +85,8 @@ show_ssr_parameters(){
 	echo "protocal_localparam: ${shadowserver_protocal_param}"
 	echo "obfs(混淆)         : ${shadowserver_obfs}"
 	echo "obfsparam(混淆参数): ${shadowserver_obfsparam}"
-
+	echo "VPS Group          : ${server_group}"
+	echo "VPS Remark         : ${server_infor}"
 
 #	echo "ssr://NDUuMzIuMjMuNjc6MTEyNDk6YXV0aF9ha2FyaW5fcmFuZDpjaGFjaGEyMC1pZXRmOnRsczEuMl90aWNrZXRfYXV0aDpNRFpHUWsxU0lTcFFSSEpvVWpCNE1RPT0vP29iZnNwYXJhbT0="
 #	echo "ssr://45.32.23.67:11249:auth_akarin_rand:chacha20-ietf:tls1.2_ticket_auth:MDZGQk1SISpQRHJoUjB4MQ==/?obfsparam="
