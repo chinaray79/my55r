@@ -7,11 +7,18 @@ plain='\033[0m'
 #/etc/shadowsocks-python/config.json
 ss_cfig_file="/etc/shadowsocks-python/config.json"
 ssr_cfig_file="/etc/shadowsocks.json"
+server_cfig_file="server.json"
 get_ip(){
     local IP=$( ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^192\.168|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\." | head -n 1 )
     [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipv4.icanhazip.com )
     [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipinfo.io/ip )
     echo ${IP}
+}
+# echo -n $1 | base64 -w0
+code_base_64(){
+	if [ $# -eq 1 ] ; then
+		echo -n $1 | base64 -w0
+	fi
 }
 get_json_value(){
 	if [ $# -eq 2 ] ; then
@@ -33,6 +40,15 @@ get_ssr_value(){
 		echo $(get_json_value ${ssr_cfig_file} $1)
 	fi
 }
+get_server_value(){
+	if [ $# -eq 1 ] ; then
+		echo $(get_json_value ${server_cfig_file} $1)
+	fi	
+}
+get_server_parameters(){
+	server_group=$(get_server_value server_group)
+	server_infor=$(get_server_value server_infor)
+}
 get_ss_parameters(){
 	shadowserver=$(get_ss_value server\")
 	shadowsocksport=$(get_ss_value server_port)
@@ -45,21 +61,46 @@ get_ss_parameters(){
 	server_infor=$(get_json_value server.json server_infor)
 }
 
-# 78.141.194.145:65320:auth_akarin_rand:chacha20-ietf:plain:alpxc00mRiFmS2psdnk1JA/?obfsparam=&remarks=RVVfTG9uZG9u&group=UmF5
+
+get_ssr_parameters(){
+	get_server_parameters
+	shadowserver_ip=$(get_ip)
+	shadowserver_port=$(get_ssr_value server_port)
+	shadowserver_protocol=$(get_ssr_value \"protocol\")
+	shadowserver_method=$(get_ssr_value method)
+	shadowserver_obfs=$(get_ssr_value \"obfs\")
+	shadowserver_password=$(get_ssr_value password)
+	shadowserver_obfsparam=$(get_ssr_value obfs_param)
+	shadowserver_protocal_param=$(get_ssr_value protocol_param)
+}
 #ssr://server:port:protocol:method:obfs:password_base64/?params_base64
 #params_base_64的构成为：
 #   obfsparam=obfsparam_base64&protoparam=protoparam_base64&remarks=remarks_base64&group=group_base64
-get_ssr_parameters(){
-	shadowserver_ip=$(get_ip)
-	shadowserver_port=$(get_ssr_value server_port)
-	shadowserver_protocol=$(get_ssr_value protocol)
-	shadowserver_method=$(get_ssr_value method)
-	shadowserver_ofs=$(get_ssr_value obfs)
-	shadowserver_password=$(get_ssr_value password)
+show_ssr_parameters(){
+	echo "ip: ${shadowserver_ip}"
+	echo "port:${shadowserver_port}"
+	echo "protocal: ${shadowserver_protocol}"
+	echo "method:${shadowserver_method}"
+	echo "obfs:${shadowserver_obfs}"
+	echo "pwd:${shadowserver_password}"
+	echo "obfsparam:${shadowserver_obfsparam}"
+	echo "protocal_localparam:${shadowserver_protocal_param}"
 
-
+	echo "ssr://NDUuMzIuMjMuNjc6MTEyNDk6YXV0aF9ha2FyaW5fcmFuZDpjaGFjaGEyMC1pZXRmOnRsczEuMl90aWNrZXRfYXV0aDpNRFpHUWsxU0lTcFFSSEpvVWpCNE1RPT0vP29iZnNwYXJhbT0="
+	echo "ssr://45.32.23.67:11249:auth_akarin_rand:chacha20-ietf:tls1.2_ticket_auth:MDZGQk1SISpQRHJoUjB4MQ==/?obfsparam="
+	echo "ssr://server:port:protocol:method:obfs:password_base64/?params_base64"
+	echo "  obfsparam=obfsparam_base64&protoparam=protoparam_base64&remarks=remarks_base64&group=group_base64"
 }
-
+calc_ssr_infors(){
+	echo "ssr infors"
+	local ssrbasic="${shadowserver_ip}:${shadowserver_port}:${shadowserver_protocol}:${shadowserver_method}:${shadowserver_obfs}:$(code_base_64 ${shadowserver_password})"
+	# $(code_base_64 ${})
+	local ssrparamas_base64="obfsparam=$(code_base_64 ${shadowserver_obfsparam})"
+	#&protoparam=$(code_base_64 ${shadowserver_protocal_param})
+	local ssr_txt="${ssrbasic}/?${ssrparamas_base64}"
+	echo ${ssr_txt}
+	echo "ssr://$(code_base_64 ${ssr_txt})"
+}
 #旧的SS方式的处理方法
 qr_generate_python(){
 	cur_dir=$( pwd )
@@ -94,8 +135,19 @@ cp_funs(){
 	echo ""
 	echo ""
 }
-get_ss_parameters
-#echo ${server_infor}
-qr_generate_python
-cp_funs
-#ls
+
+if [  -f "${ss_cfig_file}" ];then
+	get_ss_parameters
+	qr_generate_python
+	cp_funs
+fi
+
+if [  -f "${ssr_cfig_file}" ];then
+	get_ssr_parameters
+	shadowserver_ip="45.32.23.67"
+	show_ssr_parameters
+	calc_ssr_infors
+fi
+
+
+# scp ray@192.168.12.211:/home/ray/ray/my55r/ssrinfor.sh D:\H\Centos7\CentOS7\ssrinfor.sh

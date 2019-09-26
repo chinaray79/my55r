@@ -13,21 +13,31 @@ get_ip(){
 }
 
 default_server_infor="undefined"
+default_server_group="Ray"
 get_server_infor(){
+	echo -e "Please enter the server group"
+	read -p "Default Group:${default_server_group}:" server_group
+	[ -z "${server_group}" ] && server_group=${default_server_group}
+	echo ${server_group}
+
 	echo -e "Please enter the server infor"
 	read -p "Default Infor:${default_server_infor}:" server_infor
 	[ -z "${server_infor}" ] && server_infor=${default_server_infor}
-	echo ${server_infor}
+	echo "server_infor:${server_infor}"
 }
 write_server_infor(){
 	    cat > server.json <<-EOF
 {
     "server_infor":${server_infor},
+    "server_group":${server_group},
     "server_ipaddr":$(get_ip)
 }
 EOF
 }
-
+cat server.json
+echo ""
+echo ""
 get_server_infor
 write_server_infor
+echo ""
 cat server.json
