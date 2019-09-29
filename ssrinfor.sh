@@ -98,7 +98,8 @@ calc_ssr_infors(){
 	echo ""
 	local ssrbasic="${shadowserver_ip}:${shadowserver_port}:${shadowserver_protocol}:${shadowserver_method}:${shadowserver_obfs}:$(code_base_64 ${shadowserver_password})"
 	# $(code_base_64 ${})
-	local ssrparamas_base64="obfsparam=$(code_base_64 ${shadowserver_obfsparam})&protoparam=$(code_base_64 ${shadowserver_protocal_param})&remarks=$(code_base_64 ${server_infor})&group=$(code_base_64 ${server_group})"
+	#local ssrparamas_base64="obfsparam=$(code_base_64 ${shadowserver_obfsparam})&protoparam=$(code_base_64 ${shadowserver_protocal_param})&remarks=$(code_base_64 ${server_infor})&group=$(code_base_64 ${server_group})"
+	local ssrparamas_base64="obfsparam=$(code_base_64 ${shadowserver_obfsparam})&remarks=$(code_base_64 ${server_infor})&group=$(code_base_64 ${server_group})"
 	# &remarks=$(code_base_64 ${server_infor})&group=$(code_base_64 ${server_group})
 	local ssr_txt="${ssrbasic}/?${ssrparamas_base64}"
 	echo "Before Base64 Coding:"

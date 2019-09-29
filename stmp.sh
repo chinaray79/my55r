@@ -90,3 +90,9 @@ testfun1(){
 
 echo $(testfun1)
 
+cp shadowsocks.json /etc/shadowsocks.json
+
+# 目标1：如果在当前目录没有 shadowsocks.bck.json 则需要备份一个 这是一个原始备份
+# 目标2：完成任务之后，还需要复制一个 shadowsocks.json 这是跟/etc下面的是一样的文件。 当然，建立一个软链接，也是可以的。
+
+ln -s  /etc/shadowsocks.json shadowsocks.json
