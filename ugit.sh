@@ -18,6 +18,7 @@ else
 fi
 cd ${myroot}
 \cp -f my55r/*.sh ./
+\cp -f my55r/*.py ./
 cd ${myroot}
 chmod 777 *.sh 
-
+chmod 777 *.py 
