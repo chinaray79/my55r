@@ -3,7 +3,7 @@
 import os, json,base64
 from ssrextra import (byteify,is_internal_ip, get_host_ip, look_ip_from, GetSsrUrl, genQR_Code)
 
-# 打开配置文件
+# 打开配置文件 
 jsonfile = file("/etc/shadowsocks.json")
 configfile = json.load(jsonfile)
 config = byteify(configfile)
