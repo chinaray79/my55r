@@ -26,7 +26,7 @@ def InitServerInfor():
 			config[u"server_group"]="Ray"
 		Write()
 
-	if u"remarkinput" not in configfile:
+	if u"server_remark" not in configfile:
 		print "请输入服务器标注："
 		remarkinput=raw_input()
 		if len(remarkinput)>1 :
