@@ -15,6 +15,7 @@ def Write():
     openjsonfile.writelines(myjsondump) # writelines方法用于向文件写入一个序列字符串列表
     openjsonfile.close() # close方法表示关闭文件。关闭后文件不能再进行读写操作。
 
+# cp shadowsocks.org.json /etc/shadowsocks.json
 def InitServerInfor():
 	if u"server_group" not in configfile:
 		print "请输入服务器组名称:"
@@ -34,6 +35,7 @@ def InitServerInfor():
 			config[u"server_remark"]="NotDefine"
 		Write()
 
+InitServerInfor()
 
 # 读取传入配置细则
 ConfPort=config[u"server_port"]
