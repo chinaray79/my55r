@@ -27,16 +27,16 @@ service sshd reload
 echo -e "${green} checking the ssh position ${plain}"
 grep AuthorizedKeysFile /etc/ssh/sshd_config
 echo -e "${green}  go to home ${plain}"
+
 cd ~
-mkdir .ssh
-
 echo -e "${green} create id_rsa_pub ${plain}"
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2L1bjX413OrMCjNN112xrFeT8QvrOpJopUI96A/s/lszQHd+N4rlOm20bhJc9WDsbKTnpWLax9y3rxuL6KFTvH4tY0QNwbNAE9N9pdAPHYAviQ/ElXtjoKDql6uoe/uowzyPPmsV36hnFyHeb9Sehk/bZI81wrKVnXNIqWLqALk7b6FpUdcLDoaqwfAJ842AN+SI2Ks0i/Q+PnuvsoY2QXIi9P80SoaIf6Fg+0I0AOy6tJerPLOAvWe0PQGxjSmyAY+LF7lFVp4rsb7ESP8Fp8A0nXT5hgR5s0ZGZDxZMj0MlT//xZL3PNLOewDIIplNwQ0Dl9xqCt6bLE9mnc+3J Ray@RayMiPro" > id_rsa.pub
-echo "">> id_rsa.pub
-cat id_rsa.pub
-
+rm -r .ssh
+mkdir .ssh
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2L1bjX413OrMCjNN112xrFeT8QvrOpJopUI96A/s/lszQHd+N4rlOm20bhJc9WDsbKTnpWLax9y3rxuL6KFTvH4tY0QNwbNAE9N9pdAPHYAviQ/ElXtjoKDql6uoe/uowzyPPmsV36hnFyHeb9Sehk/bZI81wrKVnXNIqWLqALk7b6FpUdcLDoaqwfAJ842AN+SI2Ks0i/Q+PnuvsoY2QXIi9P80SoaIf6Fg+0I0AOy6tJerPLOAvWe0PQGxjSmyAY+LF7lFVp4rsb7ESP8Fp8A0nXT5hgR5s0ZGZDxZMj0MlT//xZL3PNLOewDIIplNwQ0Dl9xqCt6bLE9mnc+3J Ray@RayMiPro" > .ssh/id_rsa.pub
+echo "">> .ssh/id_rsa.pub
+cat .ssh/id_rsa.pub
 echo -e "${green} set /etc/dropbear/authorized_keys ${plain}"
-cat /root/id_rsa.pub > .ssh/authorized_keys
+cat .ssh/id_rsa.pub > .ssh/authorized_keys
 chmod 600 .ssh/authorized_keys
 
 echo -e "${green} update system ${plain}"

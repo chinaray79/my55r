@@ -84,8 +84,8 @@ def IncreasePort(oldport):
 	print ("")
 	return newPort
 
-#默认的method(加密)  是：  chacha20-ietf
-#默认的protocal(协议)是：  auth_akarin_rand
+#默认的method(加密)  是：  chacha20-ietf      ssr 2 3 8
+#默认的protocal(协议)是：  auth_akarin_rand   ssr 2 3 13
 # 但是，这不支持手机使用 
 # 加密使用： rc4-md5-6 
 # 协议使用： auth_chain_d
