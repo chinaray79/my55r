@@ -1,0 +1,1 @@
+url = https://github.com/chinaray79/my55r
